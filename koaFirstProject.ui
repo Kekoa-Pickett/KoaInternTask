@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1104</width>
+    <height>675</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="NewTaskButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>30</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(80, 220, 255);</string>
+    </property>
+    <property name="text">
+     <string>Add new task</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>802</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="taskGrid" rowstretch="0" columnstretch="0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="horizontalSpacing">
+      <number>7</number>
+     </property>
+     <item row="0" column="1">
+      <widget class="QGroupBox" name="task2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Task</string>
+       </property>
+       <widget class="QDateTimeEdit" name="dateTime2">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>10</y>
+          <width>141</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-color: rgb(170, 170, 255)</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="taskText2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Describe task...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="deleteButton2">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>100</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="compCheck2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Completed</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QGroupBox" name="task3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Task</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <widget class="QDateTimeEdit" name="dateTime3">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>10</y>
+          <width>141</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-color: rgb(170, 170, 255)</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="taskText3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Describe task...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="deleteButton3">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>100</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="compCheck3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Completed</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QGroupBox" name="task4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Task</string>
+       </property>
+       <widget class="QDateTimeEdit" name="dateTime4">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>10</y>
+          <width>141</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-color: rgb(170, 170, 255)</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="taskText4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Describe task...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="deleteButton4">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>100</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="compCheck4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Completed</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="task1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>262</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Task</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+       </property>
+       <widget class="QDateTimeEdit" name="dateTime1">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>10</y>
+          <width>141</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-color: rgb(170, 170, 255)</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="timeSpec">
+         <enum>Qt::LocalTime</enum>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="taskText1">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Describe task...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="deleteButton1">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>100</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="compCheck1">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>100</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Completed</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>10</y>
+      <width>258</width>
+      <height>601</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="compTaskBox">
+     <item>
+      <widget class="QLabel" name="compTaskLabel">
+       <property name="font">
+        <font>
+         <family>Georgia</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Completed Tasks</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="compTaskList">
+       <property name="sortingEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="compTaskClr">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+         <underline>false</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clear Completed Tasks</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="tasksLeftGroup">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>10</y>
+      <width>311</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QComboBox" name="dropdownList">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="currentText">
+      <string>Total tasks todo:</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Total tasks todo:</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Tasks due today :</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Completed tasks :</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QSpinBox" name="numDisplay">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>20</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">alternate-background-color: rgb(200,100,100);
+background-color: rgb(100,200,100);
+
+</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::NoButtons</enum>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1104</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
