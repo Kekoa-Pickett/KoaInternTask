@@ -23,36 +23,46 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QCombo
     QWidget)
 
 ''' This class creates the task group box that will be added to the task group'''
-
-
 class TaskBox(QGroupBox):
-        def __init__(self, parent = None, sizePolicy=None, sizePolicyDate=None):
-            super().__init__(parent)
-            self.setTitle("task")
-            #self..setObjectName(u"newTask")
-            sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
-            self.setSizePolicy(sizePolicy)
-            self.setMinimumSize(QSize(262, 125))
-            self.setMaximumSize(QSize(262, 125))
-            self.setAutoFillBackground(True)
-            self.setAlignment(Qt.AlignJustify|Qt.AlignVCenter)
-            self.dateTime = QDateTimeEdit(self)
-            self.dateTime.setObjectName(u"dateTime")
-            self.dateTime.setGeometry(QRect(100, 10, 141, 22))
-            sizePolicyDate.setHeightForWidth(self.dateTime.sizePolicy().hasHeightForWidth())
-            self.dateTime.setSizePolicy(sizePolicyDate)
-            self.dateTime.setCalendarPopup(True)
-            self.dateTime.setTimeSpec(Qt.LocalTime)
-            self.taskText = QTextEdit(self)
-            self.taskText.setObjectName(u"taskText")
-            self.taskText.setGeometry(QRect(10, 40, 231, 51))
-            self.taskText.setPlaceholderText("Describe task ...")
-            self.deleteButton1 = QPushButton(u"Delete", self)
-            self.deleteButton1.setObjectName(u"deleteButton1")
-            self.deleteButton1.setGeometry(QRect(180, 100, 61, 20))
-            self.compCheck1 = QCheckBox("Completed", self)
-            self.compCheck1.setObjectName(u"compCheck1")
-            self.compCheck1.setGeometry(QRect(10, 100, 91, 20))
+    def __init__(self, parent = None, compTaskList = None):
+        super().__init__(parent)
+        self.setTitle("task")
+
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicyDate = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth()) #size setting
+        self.setSizePolicy(sizePolicy)
+        self.setMinimumSize(QSize(262, 125))
+        self.setMaximumSize(QSize(262, 125))
+        self.setAutoFillBackground(True)
+        self.setAlignment(Qt.AlignJustify|Qt.AlignVCenter)
+
+        self.dateTime = QDateTimeEdit(self)                                         # date feature
+        self.dateTime.setObjectName(u"dateTime")
+        self.dateTime.setGeometry(QRect(100, 10, 141, 22))
+        sizePolicyDate.setHeightForWidth(self.dateTime.sizePolicy().hasHeightForWidth())
+        self.dateTime.setSizePolicy(sizePolicyDate)
+        self.dateTime.setCalendarPopup(True)
+        self.dateTime.setTimeSpec(Qt.LocalTime)
+
+        self.taskText = QTextEdit(self)                                             # textbox setting
+        self.taskText.setObjectName(u"taskText")
+        self.taskText.setGeometry(QRect(10, 40, 231, 51))
+        self.taskText.setPlaceholderText("Describe task ...")
+
+        self.deleteButton = QPushButton(u"Delete", self)                            # delete button settings
+        self.deleteButton.setObjectName(u"deleteButton")
+        self.deleteButton.setGeometry(QRect(180, 100, 61, 20))
+        self.deleteButton.clicked.connect(self.deleteLater)
+
+        self.compCheck = QCheckBox("Completed", self)                              # Completed settings
+        self.compCheck.setObjectName(u"compCheck1")
+        self.compCheck.setGeometry(QRect(10, 100, 91, 20))
+        self.compCheck.stateChanged.connect(self.completedTask(compTaskList, self.taskText.toPlainText()))
+
+    def completedTask(self, parent = None, text = None):
+            parent.addItem(QListWidgetItem(text))               # Doesn't work, just adds automatically because stateChanged doesn't work properly
+            self.deleteLater
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -65,10 +75,44 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(10)
         font.setBold(True)
-        self.gridLayoutWidget = QWidget(self.centralwidget)
+
+        self.verticalLayoutWidget = QWidget(self.centralwidget)             #Completed Tasks List
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(830, 10, 258, 601))
+        self.compTaskBox = QVBoxLayout(self.verticalLayoutWidget)
+        self.compTaskBox.setObjectName(u"compTaskBox")
+        self.compTaskBox.setContentsMargins(0, 0, 0, 0)
+        self.compTaskLabel = QLabel(self.verticalLayoutWidget)
+        self.compTaskLabel.setObjectName(u"compTaskLabel")
+
+        font1 = QFont()
+        font1.setFamilies([u"Georgia"])
+        font1.setPointSize(12)
+        self.compTaskLabel.setFont(font1)
+        self.compTaskLabel.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
+
+        self.compTaskBox.addWidget(self.compTaskLabel)
+
+        self.compTaskList = QListWidget(self.verticalLayoutWidget)
+        self.compTaskList.setObjectName(u"compTaskList")
+        self.compTaskList.setSortingEnabled(False)
+
+        self.compTaskBox.addWidget(self.compTaskList)
+        
+
+        self.compTaskClr = QPushButton(self.verticalLayoutWidget)
+        self.compTaskClr.setObjectName(u"compTaskClr")
+        font2 = QFont()
+        font2.setPointSize(10)
+        self.compTaskClr.setFont(font2)
+
+        self.compTaskBox.addWidget(self.compTaskClr)
+        
+        self.gridLayoutWidget = QWidget(self.centralwidget)                 #All tasks list
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
         self.gridLayoutWidget.setGeometry(QRect(10, 90, 802, 521))
         self.taskGrid = QGridLayout(self.gridLayoutWidget)
+        self.taskGrid.setColumnStretch(2,0)
         self.taskGrid.setObjectName(u"taskGrid")
         self.taskGrid.setSizeConstraint(QLayout.SetFixedSize)
         self.taskGrid.setHorizontalSpacing(7)
@@ -78,49 +122,12 @@ class Ui_MainWindow(object):
         self.NewTaskButton.setFont(font)
         self.NewTaskButton.setStyleSheet(u"background-color: rgb(80, 220, 255);")
         # Size needed for the task elements
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicyDate = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
-        #newTask = QGroupBox(u"task", self.gridLayoutWidget)
-        self.NewTaskButton.clicked.connect(lambda: self.taskGrid.addWidget(TaskBox(self.gridLayoutWidget, sizePolicy, sizePolicyDate)))
-
-
-        self.verticalLayoutWidget = QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(830, 10, 258, 601))
-        self.compTaskBox = QVBoxLayout(self.verticalLayoutWidget)
-        self.compTaskBox.setObjectName(u"compTaskBox")
-        self.compTaskBox.setContentsMargins(0, 0, 0, 0)
-        self.compTaskLabel = QLabel(self.verticalLayoutWidget)
-        self.compTaskLabel.setObjectName(u"compTaskLabel")
-        font1 = QFont()
-        font1.setFamilies([u"Georgia"])
-        font1.setPointSize(12)
-        self.compTaskLabel.setFont(font1)
-        self.compTaskLabel.setFrameShape(QFrame.NoFrame)
-        self.compTaskLabel.setTextFormat(Qt.PlainText)
-        self.compTaskLabel.setScaledContents(False)
-        self.compTaskLabel.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-        self.compTaskLabel.setMargin(0)
-
-
-
-        self.compTaskBox.addWidget(self.compTaskLabel)
-
-        self.compTaskList = QListWidget(self.verticalLayoutWidget)
-        self.compTaskList.setObjectName(u"compTaskList")
-        self.compTaskList.setSortingEnabled(False)
-
-        self.compTaskBox.addWidget(self.compTaskList)
-
-        self.compTaskClr = QPushButton(self.verticalLayoutWidget)
-        self.compTaskClr.setObjectName(u"compTaskClr")
-        font2 = QFont()
-        font2.setPointSize(10)
-        font2.setBold(False)
-        font2.setUnderline(False)
-        self.compTaskClr.setFont(font2)
-
-        self.compTaskBox.addWidget(self.compTaskClr)
+        #sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        #sizePolicyDate = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        self.NewTaskButton.clicked.connect(lambda: self.taskGrid.addWidget(TaskBox(
+                                           self.centralwidget, self.compTaskList)))
+        print(self.centralwidget)
+        
 
         self.tasksLeftGroup = QGroupBox(self.centralwidget)
         self.tasksLeftGroup.setObjectName(u"tasksLeftGroup")
@@ -165,32 +172,16 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.NewTaskButton.setText(QCoreApplication.translate("MainWindow", u"Add new task", None))
-        """self.task2.setTitle(QCoreApplication.translate("MainWindow", u"Task", None))
-        self.taskText2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Describe task...", None))
-        self.deleteButton2.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.compCheck2.setText(QCoreApplication.translate("MainWindow", u"Completed", None))
-        self.task3.setTitle(QCoreApplication.translate("MainWindow", u"Task", None))
-        self.taskText3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Describe task...", None))
-        self.deleteButton3.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.compCheck3.setText(QCoreApplication.translate("MainWindow", u"Completed", None))
-        self.task4.setTitle(QCoreApplication.translate("MainWindow", u"Task", None))
-        self.taskText4.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Describe task...", None))
-        self.deleteButton4.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.compCheck4.setText(QCoreApplication.translate("MainWindow", u"Completed", None))
-        self.task1.setTitle(QCoreApplication.translate("MainWindow", u"Task", None))
-        self.taskText1.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Describe task...", None))
-        self.deleteButton1.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.compCheck1.setText(QCoreApplication.translate("MainWindow", u"Completed", None))"""
         self.compTaskLabel.setText(QCoreApplication.translate("MainWindow", u"Completed Tasks", None))
         self.compTaskClr.setText(QCoreApplication.translate("MainWindow", u"Clear Completed Tasks", None))
         self.tasksLeftGroup.setTitle("")
-        #self.dropdownList.setItemText(0, QCoreApplication.translate("MainWindow", u"Total tasks todo:", None))
-        #self.dropdownList.setItemText(1, QCoreApplication.translate("MainWindow", u"Tasks due today :", None))
-        #self.dropdownList.setItemText(2, QCoreApplication.translate("MainWindow", u"Completed tasks :", None))
 
         self.dropdownList.setCurrentText(QCoreApplication.translate("MainWindow", u"Total tasks todo:", None))
     # retranslateUi
 
+    def completedTask(self, parent = None, text = None):
+        #self.compItem = QListWidgetItem("Task", self)
+        self.deleteLater
 
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -210,86 +201,3 @@ if __name__ == "__main__":
     window.show()
 
     sys.exit(app.exec())
-
-'''       self.task2 = QGroupBox(self.gridLayoutWidget)
-        self.task2.setObjectName(u"task2")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.task2.sizePolicy().hasHeightForWidth())
-        self.task2.setSizePolicy(sizePolicy)
-        self.task2.setMinimumSize(QSize(262, 125))
-        self.task2.setMaximumSize(QSize(262, 125))
-        self.task2.setAutoFillBackground(True)
-        self.dateTime2 = QDateTimeEdit(self.task2)
-        self.dateTime2.setObjectName(u"dateTime2")
-        self.dateTime2.setGeometry(QRect(100, 10, 141, 22))
-        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.dateTime2.sizePolicy().hasHeightForWidth())
-        self.dateTime2.setSizePolicy(sizePolicy1)
-        self.dateTime2.setCalendarPopup(True)
-        self.taskText2 = QTextEdit(self.task2)
-        self.taskText2.setObjectName(u"taskText2")
-        self.taskText2.setGeometry(QRect(10, 40, 231, 51))
-        self.deleteButton2 = QPushButton(self.task2)
-        self.deleteButton2.setObjectName(u"deleteButton2")
-        self.deleteButton2.setGeometry(QRect(180, 100, 61, 20))
-        self.compCheck2 = QCheckBox(self.task2)
-        self.compCheck2.setObjectName(u"compCheck2")
-        self.compCheck2.setGeometry(QRect(20, 100, 91, 20))
-
-        self.taskGrid.addWidget(self.task2, 0, 1, 1, 1)
-
-        self.task3 = QGroupBox(self.gridLayoutWidget)
-        self.task3.setObjectName(u"task3")
-        sizePolicy.setHeightForWidth(self.task3.sizePolicy().hasHeightForWidth())
-        self.task3.setSizePolicy(sizePolicy)
-        self.task3.setMinimumSize(QSize(262, 125))
-        self.task3.setMaximumSize(QSize(262, 125))
-        self.task3.setAutoFillBackground(True)
-        self.task3.setCheckable(True)
-        self.task3.setChecked(True)
-        self.dateTime3 = QDateTimeEdit(self.task3)
-        self.dateTime3.setObjectName(u"dateTime3")
-        self.dateTime3.setGeometry(QRect(100, 10, 141, 22))
-        sizePolicy1.setHeightForWidth(self.dateTime3.sizePolicy().hasHeightForWidth())
-        self.dateTime3.setSizePolicy(sizePolicy1)
-        self.dateTime3.setCalendarPopup(True)
-        self.taskText3 = QTextEdit(self.task3)
-        self.taskText3.setObjectName(u"taskText3")
-        self.taskText3.setGeometry(QRect(10, 40, 231, 51))
-        self.deleteButton3 = QPushButton(self.task3)
-        self.deleteButton3.setObjectName(u"deleteButton3")
-        self.deleteButton3.setGeometry(QRect(180, 100, 61, 20))
-        self.compCheck3 = QCheckBox(self.task3)
-        self.compCheck3.setObjectName(u"compCheck3")
-        self.compCheck3.setGeometry(QRect(20, 100, 91, 20))
-
-        self.taskGrid.addWidget(self.task3, 0, 2, 1, 1)
-
-        self.task4 = QGroupBox(self.gridLayoutWidget)
-        self.task4.setObjectName(u"task4")
-        sizePolicy.setHeightForWidth(self.task4.sizePolicy().hasHeightForWidth())
-        self.task4.setSizePolicy(sizePolicy)
-        self.task4.setMinimumSize(QSize(262, 125))
-        self.task4.setMaximumSize(QSize(262, 125))
-        self.task4.setAutoFillBackground(True)
-        self.dateTime4 = QDateTimeEdit(self.task4)
-        self.dateTime4.setObjectName(u"dateTime4")
-        self.dateTime4.setGeometry(QRect(100, 10, 141, 22))
-        sizePolicy1.setHeightForWidth(self.dateTime4.sizePolicy().hasHeightForWidth())
-        self.dateTime4.setSizePolicy(sizePolicy1)
-        self.dateTime4.setCalendarPopup(True)
-        self.taskText4 = QTextEdit(self.task4)
-        self.taskText4.setObjectName(u"taskText4")
-        self.taskText4.setGeometry(QRect(10, 40, 231, 51))
-        self.deleteButton4 = QPushButton(self.task4)
-        self.deleteButton4.setObjectName(u"deleteButton4")
-        self.deleteButton4.setGeometry(QRect(180, 100, 61, 20))
-        self.compCheck4 = QCheckBox(self.task4)
-        self.compCheck4.setObjectName(u"compCheck4")
-        self.compCheck4.setGeometry(QRect(20, 100, 91, 20))
-
-        self.taskGrid.addWidget(self.task4, 1, 0, 1, 1)'''
