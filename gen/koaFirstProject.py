@@ -8,7 +8,6 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 from source.tasks import TaskBox
-from gen.koaFirstProjectV1_ui import *
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -23,52 +22,6 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QCombo
     QSpinBox, QStatusBar, QTextEdit, QVBoxLayout,
     QWidget)
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.connections()
-
-
-    def connections(self):
-        self.ui.taskGrid.setColumnStretch(2,0)
-        # taskGrid = centralWidget.findChild(QWidget, "gridLayoutWidget")
-        # vertLayout = centralWidget.findChild(QWidget, "verticalLayoutWidget")
-        # compTaskClr = vertLayout.findChild(QPushButton,"compTaskClr")
-        
-        # compTaskClr.clicked.connect(lambda: centralWidget.compTaskList.clear())
-        # print(vertLayout.children())
-        # newTaskButton = centralWidget.findChild(QPushButton,"newTaskButton")
-        # taskGrid = centralWidget.findChild(QGridLayout, "taskGrid")
-        # newTaskButton.clicked.connect(lambda: taskGrid.addWidget(TaskBox(
-        #                                    centralWidget)))
-        self.ui.compTaskClr.clicked.connect(lambda: self.ui.compTaskList.clear())
-        self.ui.newTaskButton.clicked.connect(lambda: self.ui.taskGrid.addWidget(
-                                                TaskBox(self.ui.centralwidget)))
-    
-    ''' Moves task over to completed section'''
-    def completedTask(self, centralWidget = None, text = None):
-        #if (self.compCheck.isChecked()):                               # Allow user to still have access to it
-            vertLayout = centralWidget.findChild(QWidget, name="verticalLayoutWidget")
-            compTaskList = vertLayout.findChild(QListWidget, name="compTaskList")
-            compTaskList.addItem(QListWidgetItem(text))
-            tasksLeftGroup = centralWidget.findChild(QGroupBox, name="tasksLeftGroup")                          
-            self.deleteLater()                                          # Remove task altogether
-            self.updateTaskLeftGroup(tasksLeftGroup, centralWidget)
-    
-    def updateTaskLeftGroup(self, tasksLeftGroup = None, centralWidget = None):
-        dropdown = tasksLeftGroup.findChild(QComboBox,"dropdownList")
-        dropdownNum = tasksLeftGroup.findChild(QSpinBox, "numDisplay")
-        dropdownTxt = dropdown.currentText()
-        if dropdownTxt == "Total tasks todo:":
-            gridLayout = centralWidget.findChild(QWidget,"gridLayoutWidget")
-            dropdownNum.setValue(gridLayout.children().__len__() - 2)
-        elif dropdownTxt == "Tasks due today:":
-            print("Text is not accounted for yet")
-        else:
-            print("Text is not accounted for yet")
-'''
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -101,7 +54,7 @@ class Ui_MainWindow(object):
         self.compTaskList.setObjectName(u"compTaskList")
         self.compTaskList.setSortingEnabled(False)
         self.compTaskBox.addWidget(self.compTaskList)
-        #self.compTaskBox.children().__len__
+        self.compTaskBox.children().__len__
 
         self.compTaskClr = QPushButton(self.verticalLayoutWidget)           # Completed Clear Button
         self.compTaskClr.setObjectName(u"compTaskClr")
@@ -177,4 +130,4 @@ class Ui_MainWindow(object):
         self.tasksLeftGroup.setTitle("")
 
         self.dropdownList.setCurrentText(QCoreApplication.translate("MainWindow", u"Total tasks todo:", None))
-    # retranslateUi '''
+    # retranslateUi
