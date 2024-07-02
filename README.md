@@ -1,8 +1,8 @@
 # TaskTracker
  
 ## Purpose:
-- Creates a window that allows one to create task boxes to list tasks.
-- Has an option to delete tasks or list all completed tasks.
+- Creates a window that allows user to create empty task boxes to fill in
+- Has an option to delete tasks or list all completed tasks
 
 ## **Installation**
 ### Requirements:
