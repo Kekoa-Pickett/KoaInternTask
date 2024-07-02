@@ -33,21 +33,11 @@ class MainWindow(QMainWindow):
 
     def connections(self):
         self.ui.taskGrid.setColumnStretch(2,0)
-        # taskGrid = centralWidget.findChild(QWidget, "gridLayoutWidget")
-        # vertLayout = centralWidget.findChild(QWidget, "verticalLayoutWidget")
-        # compTaskClr = vertLayout.findChild(QPushButton,"compTaskClr")
-        
-        # compTaskClr.clicked.connect(lambda: centralWidget.compTaskList.clear())
-        # print(vertLayout.children())
-        # newTaskButton = centralWidget.findChild(QPushButton,"newTaskButton")
-        # taskGrid = centralWidget.findChild(QGridLayout, "taskGrid")
-        # newTaskButton.clicked.connect(lambda: taskGrid.addWidget(TaskBox(
-        #                                    centralWidget)))
         self.ui.compTaskClr.clicked.connect(lambda: self.ui.compTaskList.clear())
         self.ui.newTaskButton.clicked.connect(lambda: self.ui.taskGrid.addWidget(
                                                 TaskBox(self.ui.centralwidget)))
     
-    ''' Moves task over to completed section'''
+    ''' Moves task over to completed section
     def completedTask(self, centralWidget = None, text = None):
         #if (self.compCheck.isChecked()):                               # Allow user to still have access to it
             vertLayout = centralWidget.findChild(QWidget, name="verticalLayoutWidget")
@@ -68,3 +58,4 @@ class MainWindow(QMainWindow):
             print("Text is not accounted for yet")
         else:
             print("Text is not accounted for yet")
+            '''
