@@ -1,21 +1,19 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+    QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QComboBox,
-    QDateTimeEdit, QFrame, QGridLayout, QGroupBox,
+    QDateTimeEdit, QFrame, QGridLayout, QGroupBox, 
     QLabel, QLayout, QListWidget, QListWidgetItem,
     QMainWindow, QMenuBar, QPushButton, QSizePolicy,
-    QSpinBox, QStatusBar, QTextEdit, QVBoxLayout,
-    QWidget)
+    QSpinBox, QStatusBar, QTextEdit, QVBoxLayout, QWidget)
 
 ''' This class creates the task group box that will be added to the task group
     Also deals with buttons and checkboxes that are clicked in the file'''
 class TaskBox(QGroupBox):
-    def __init__(self, centralWidget = None, compTaskList = None):
+    def __init__(self, centralWidget = None):
         super().__init__(centralWidget)
         self.setTitle("Todo")
 
@@ -52,12 +50,13 @@ class TaskBox(QGroupBox):
         self.compCheck.setGeometry(QRect(10, 100, 91, 20))
         self.compCheck.stateChanged.connect(lambda : self.completedTask(centralWidget, self.taskText.toPlainText()))
         
-    ''' Moves task over to completed section'''
+    ''' Moves task over to completed section '''
     def completedTask(self, centralWidget = None, text = None):
         #if (self.compCheck.isChecked()):                               # Allow user to still have access to it
-            compTaskBox = centralWidget.findChild(QWidget, name="compTaskBox")
-            compTaskList = compTaskBox.findChild(QListWidget, name="compTaskList")
-            compTaskList.addItem(QListWidgetItem(text))
+            vertLayout = centralWidget.findChild(QWidget, name="verticalLayoutWidget")
+            compTaskList = vertLayout.findChild(QListWidget, name="compTaskList")
+            if (text != ""):
+                compTaskList.addItem(QListWidgetItem(text))
             tasksLeftGroup = centralWidget.findChild(QGroupBox, name="tasksLeftGroup")                          
             self.deleteLater()                                          # Remove task altogether
             self.updateTaskLeftGroup(tasksLeftGroup, centralWidget)
@@ -66,7 +65,6 @@ class TaskBox(QGroupBox):
         dropdown = tasksLeftGroup.findChild(QComboBox,"dropdownList")
         dropdownNum = tasksLeftGroup.findChild(QSpinBox, "numDisplay")
         dropdownTxt = dropdown.currentText()
-        print (dropdownTxt)
         if dropdownTxt == "Total tasks todo:":
             gridLayout = centralWidget.findChild(QWidget,"gridLayoutWidget")
             dropdownNum.setValue(gridLayout.children().__len__() - 2)
