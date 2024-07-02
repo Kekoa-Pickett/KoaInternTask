@@ -8,7 +8,7 @@
 ### Requirements:
 * Visual Studio Code
 * Python 3.7
-* virtual environment
+* venv
 * Pyside6
 
 ### Instructions: 
