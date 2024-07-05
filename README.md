@@ -28,5 +28,5 @@
 4. To install the rest of the packages, run `$ pip install -r requirements.txt`
 
 ### To run:
-1. If files python files aren't generated, use pyside6-uic to generate py files and use this repo as guideline for structure of workspace
+1. Run qmake.py to generate "gen" folder and python generated file
 2. Run main.py
