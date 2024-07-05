@@ -44,26 +44,3 @@ class MainWindow(QMainWindow):
         }
         newTask = TaskBox(self.ui, config)
         self._task_index += 1
-
-    ''' Moves task over to completed section
-    def completedTask(self, centralWidget = None, text = None):
-        #if (self.compCheck.isChecked()):                               # Allow user to still have access to it
-            vertLayout = centralWidget.findChild(QWidget, name="verticalLayoutWidget")
-            compTaskList = vertLayout.findChild(QListWidget, name="compTaskList")
-            compTaskList.addItem(QListWidgetItem(text))
-            tasksLeftGroup = centralWidget.findChild(QGroupBox, name="tasksLeftGroup")                          
-            self.deleteLater()                                          # Remove task altogether
-            self.updateTaskLeftGroup(tasksLeftGroup, centralWidget)
-    
-    def updateTaskLeftGroup(self, tasksLeftGroup = None, centralWidget = None):
-        dropdown = tasksLeftGroup.findChild(QComboBox,"dropdownList")
-        dropdownNum = tasksLeftGroup.findChild(QSpinBox, "numDisplay")
-        dropdownTxt = dropdown.currentText()
-        if dropdownTxt == "Total tasks todo:":
-            gridLayout = centralWidget.findChild(QWidget,"gridLayoutWidget")
-            dropdownNum.setValue(gridLayout.children().__len__() - 2)
-        elif dropdownTxt == "Tasks due today:":
-            print("Text is not accounted for yet")
-        else:
-            print("Text is not accounted for yet")
-            '''
