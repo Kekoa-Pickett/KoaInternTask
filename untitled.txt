@@ -1,0 +1,44 @@
+The resizing is wrong, probably because i have the size settings set to fixed.
+For this, I might need to switch everything to minimumExpanding.
+
+Python file works, opens everything. Just need to make it interactive with a bunch of functions
+
+Maybe get rid of the completed tasks list and just move them to the end of the tasks list and cross out or fade them. 
+
+Fix location of added tasks:
+- Get taskGrid.children.sizeof and lower bound div by 3 = row and col = taskGrid.children.sizeof % 3.
+- Just set every one to 0,0 and see if it will move the notes automatically. 
+= As of now, just adds it in a list format with one under the other.
+
+
+
+Layout of taskBox
+
+self.taskGrid = container for all of the tasks to be added.
+self.newTask = new task to be created using own class
+
+
+
+
+in the main class, connect the add new task button to the addNewTask function that uses the "self.taskGrid" as a parameter. 
+This function will call on the TaskBox class to create a QGroupBox element that will take the sizePolicy and sizePolicyDate for the init
+requirements and will create an element.
+This element will be added to the taskGrid in the addNewTask function and then returned. 
+
+Can I make the addNewTask function part of the class? 
+
+Did:
+I completed the add task feature, adds everything in one column on the left side.
+Got rid of the placeholder tasks and created task elements that are not checkable.
+Condensed a lot of the code, interms of naming different things.
+
+Todo: 
+1. Figure out how to format the tasks inside of the widget and get the date correct.
+2. Work on the delete buttons for each task created as well as the completed function.
+3. Fix the taskTodoGroup box to update each time. 
+*** I need to create a way to update the values each time something happens, whether it is the same event on the screen or if we switch it.
+4. Work on the completed tasks list, probably just creating a widget that shows the time and a shortened task description.
+5. Implement the clear completed tasks feature. 
+6. Get over to GitHub, figure out how that works.
+
+Work on the color scheme, change colors?

@@ -1,0 +1,6 @@
+The resizing is wrong, probably because i have the size settings set to fixed.
+
+Python file works, opens everything. Just need to make it interactive with a bunch of functions
+
+Maybe get rid of the completed tasks list and just move them to the end of the tasks list and cross out or fade them. 
+
