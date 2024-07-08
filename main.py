@@ -1,6 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QFile
+from PySide6.QtWidgets import QApplication
 from forms.koaFirstProject import MainWindow
 
 if __name__ == "__main__":
