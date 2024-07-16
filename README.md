@@ -22,7 +22,7 @@
 
 #### Virtualenv Setup
 1. Ensure your VSCode is configured for Python 3.7
-1. In VSCode's terminal, run `$ python -m venv .venv` to create a virtual environment
+1. In VSCode's terminal, run `$ python -m venv .venv` to create a virtual environment. Run ```$ py -m venv .venv``` on Windows
 2. Visit [here](https://www.python.org/downloads/release/python-379/) and download the windows excecutable file or macOS file
 3. Bring this file to your cloned directory, and run `$ pip install {File Name}`
 4. To install the rest of the packages, run `$ pip install -r requirements.txt`
